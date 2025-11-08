@@ -69,7 +69,9 @@
   --max-height: 736px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -77,11 +79,109 @@
 
 body {
   background-color: var(--stone-100);
-  color: var(--stone-900);
+  color: var(--stone-600);
   font-family: var(--font-sans);
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-size: var(--text-preset-4);
+  line-height: var(--line-height-4);
+}
+
+h1,
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: normal;
   line-height: var(--line-height-1);
+}
+
+h1 {
+  color: var(--stone-900);
+  font-size: var(--text-preset-1);
+}
+
+h2 {
+  color: var(--brown-800);
+  font-size: var(--text-preset-2);
+}
+
+picture,
+img {
+  display: block;
+  max-width: 100%;
+}
+
+hr {
+  border: none;
+  border-block-start: 1px solid var(--stone-150);
+}
+
+ul,
+ol {
+  --_market_type: var(--marker-type, disc);
+  --_marker-suffix: var(--marker-suffix, '');
+  list-style: none;
+
+  li {
+    margin-inline-start: var(--space-500);
+    text-indent: calc(var(--space-500) * -1);
+  }
+
+  li::before {
+    content: counter(list-item, var(--_market_type)) var(--_marker-suffix);
+    color: var(--brown-800);
+    font-weight: 700;
+    font-variant-numeric: normal;
+    display: block;
+    float: left;
+    width: var(--space-200);
+    margin-inline: var(--space-100, var(--space-200));
+  }
+}
+
+ol {
+  --marker-type: decimal;
+  --marker-suffix: '.';
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+
+th,
+td {
+  padding: var(--space-150) var(--space-100);
+
+  &:first-child {
+    padding-inline-start: var(--space-400);
+  }
+  &:last-child {
+    padding-inline-end: var(--space-400);
+  }
+}
+
+th {
+  font-weight: 400;
+}
+
+td {
+  font-weight: 700;
+  color: var(--brown-800);
+}
+
+tr {
+  & + & {
+    border-block-start: 1px solid var(--stone-150);
+  }
+
+  &:first-child {
+    padding-block-start: 0;
+  }
+  &:last-child {
+    padding-block-start: 0;
+  }
 }
