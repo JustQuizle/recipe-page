@@ -222,7 +222,7 @@ tr {
   }
 }
 
-.card__image {
+.card__image img {
   margin-inline: auto;
   object-fit: cover;
 
