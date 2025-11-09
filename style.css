@@ -50,7 +50,7 @@
   --space-200: 16px;
   --space-300: 24px;
   --space-400: 32px;
-  --space-500: 48px;
+  --space-500: 40px;
   --space-600: 64px;
   --space-950: 76px;
   --space-1600: 128px;
@@ -66,7 +66,7 @@
   --text-preset-3: 20px;
   --text-preset-4: 16px;
 
-  --max-height: 736px;
+  --max-width: 736px;
 }
 
 *,
@@ -119,24 +119,26 @@ hr {
 
 ul,
 ol {
+  --_marker-color: var(--marker_color, var(--brown-800));
   --_market_type: var(--marker-type, disc);
   --_marker-suffix: var(--marker-suffix, '');
   list-style: none;
 
   li {
+    --flow-space: var(--space-100);
     margin-inline-start: var(--space-500);
     text-indent: calc(var(--space-500) * -1);
   }
 
   li::before {
     content: counter(list-item, var(--_market_type)) var(--_marker-suffix);
-    color: var(--brown-800);
+    color: var(--_marker-color);
     font-weight: 700;
     font-variant-numeric: normal;
     display: block;
     float: left;
     width: var(--space-200);
-    margin-inline: var(--space-100, var(--space-200));
+    margin-inline: var(--space-100) var(--space-200);
   }
 }
 
@@ -183,5 +185,78 @@ tr {
   }
   &:last-child {
     padding-block-start: 0;
+  }
+}
+
+.flow > * + * {
+  margin-block-start: var(--flow-space, var(--space-500));
+}
+
+.challenge__wrapper {
+  --max-child-width: var(--max-width, 320px);
+
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 0;
+
+  @media (min-width: 550px) {
+    padding: var(--space-1600)
+      max(var(--space-950), calc(50% - var(--max-child-width) / 2));
+  }
+}
+
+.card {
+  background-color: var(--white);
+  overflow: hidden;
+  max-width: var(--max-child-width);
+
+  @media (min-width: 550px) {
+    border-radius: var(--radius-lg);
+    padding: var(--space-500);
+  }
+}
+
+.card__image {
+  margin-inline: auto;
+  object-fit: cover;
+
+  @media (min-width: 550px) {
+    border-radius: var(--radius-sm);
+  }
+}
+.card__content {
+  padding: var(--space-400);
+  padding-block-start: 0;
+
+  @media (min-width: 550px) {
+    padding: 0;
+  }
+
+  > * {
+    --flow-space: var(--space-400);
+  }
+
+  > section,
+  > p {
+    --flow-space: var(--space-300);
+  }
+}
+
+.prep__section {
+  --marker_color: var(--rose-800);
+  background-color: var(--rose-50);
+  border-radius: var(--radius-sm);
+  padding: var(--space-300);
+
+  > * {
+    --flow-space: var(--space-200);
+  }
+
+  h2 {
+    color: var(--rose-800);
+    font-family: var(--font-sans);
+    font-size: var(--text-preset-3);
+    font-weight: 600;
   }
 }
